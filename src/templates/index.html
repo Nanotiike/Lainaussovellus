@@ -1,0 +1,28 @@
+<title>Library</title>
+{% extends "layout.html" %}
+
+
+
+{% block content %}
+
+
+{% if session.user_id %}
+
+<div class="topnav">
+    <a href="/loan_books">Borrow books</a>
+    <a href="/return_books">Return books</a>
+    <a href="/logout">Logout</a>
+</div>
+
+{% else %}
+
+<div class="topnav">
+    <a href="/login">Login</a>
+    <a href="/register">Register</a>
+</div>
+
+<p>Welcome to the Library</p>
+
+{% endif %}
+
+{% endblock %}

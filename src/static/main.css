@@ -1,0 +1,50 @@
+body {
+  margin: auto;
+  max-width: 60em;
+  font-family: 'Verdana', 'Arial', sans-serif;
+  background-color: #f7fffe;
+}
+
+.header {
+  background: rgb(112, 112, 112);
+  padding: 1em;
+  font-size: 1em;
+}
+
+.topnav {
+  background-color: rgb(112, 112, 112);
+  overflow: hidden;
+}
+
+.topnav a {
+  float: left;
+  color: #000000;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: rgb(168, 168, 168);
+  color: black;
+}
+
+table {
+  border-collapse: collapse;
+  font-size: 0.8em;
+}
+
+caption {
+  font-weight: bold;
+  font-size: 18px;
+  text-align: left;
+  color: rgb(0, 0, 0);
+  margin-bottom: 10px;
+}
+
+th,
+td {
+  border: 1px solid black;
+  padding: 8px;
+}
