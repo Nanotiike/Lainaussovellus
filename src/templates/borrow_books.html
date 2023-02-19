@@ -8,12 +8,6 @@
     <a href="/logout">Logout</a>
 </div>
 
-<hr>
-  {% for book in books %}
-  {{ book.name }}
-<hr>
-{% endfor %}
-
 <table>
     <caption> <b>Books</b></caption>
     <thead style="text-align: left;">
@@ -26,7 +20,7 @@
     <tbody>
         {% for book in books %}
         <tr>
-            <td><input type="checkbox" name="check" value={{ article.ref_key }}></td>
+            <td><input type="checkbox" name="check" value={{ book.id }}></td>
             <td>{{book.name}}</td>
             <td>{{book.amount}}</td>
         </tr>
@@ -39,5 +33,9 @@
 <p>User is Admin</p>
 
 {% endif %}
+
+<form action="/add_book" method="get">
+    <input type="submit" value="Add book">
+</form>
 
 {% endblock %}

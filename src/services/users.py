@@ -20,7 +20,7 @@ def register(username, password):
         return False
 
 def login(username, password):
-    sql = text("SELECT id, password, username FROM users WHERE username=:username")
+    sql = text("SELECT id, password, username, admin FROM users WHERE username=:username")
     result = db.session.execute(sql, {"username": username})
     user = result.fetchone()
     if not user:
@@ -37,10 +37,7 @@ def user_id():
     return session.get("user_id", 0)
 
 def user_admin():
-    if session.get("admin_privilege", 0) == True:
-        return True
-    else:
-        return False
+    return session.get("admin_privilege", 0)
 
 
 def logout():

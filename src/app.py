@@ -74,9 +74,12 @@ def confirm_books():
 
 @app.route("/add_book", methods = ["get", "post"])
 def add_book():
+    if request.method == "GET":
+        return render_template("add_book.html")
+    
     if request.method == "POST":
-        name = request.form("name")
-        amount = request.form("amount")
+        name = request.form["name"]
+        amount = request.form["amount"]
         if not books.add_books(name, amount):
             return render_template("error.html", message="Adding the book failed, try again")
         
