@@ -3,6 +3,8 @@ import string
 from db import db
 from config import DATABASE_URL, SECRET_KEY
 import services.users as users
+import services.books as books
+from sqlalchemy import text
 
 
 app = Flask(__name__)
@@ -12,7 +14,8 @@ db.init_app(app)
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    results = users.find_all()
+    return render_template("index.html", users = results)
 
 @app.route("/login", methods = ["get","post"])
 def login():
@@ -51,6 +54,23 @@ def register():
             return render_template("error.html", message="The registration was unsuccesful, try a different username")
 
         return redirect("/")
+
+@app.route("/borrow_books", methods = ["get", "post"])
+def borrow_books():
+    if request.method == "GET":
+        all_books = books.find_all_books()
+
+        return render_template("borrow_books.html", books = all_books)
+
+@app.route("/confirm_books", methods = ["get", "post"])
+def confirm_books():
+    if request.method == "GET":
+        #show what was chosen in borrow_books
+        pass
+
+    if request.method == "POST":
+        #take chosen books and make borrowings of of them
+        pass
 
 @app.route("/logout")
 def logout():

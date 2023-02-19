@@ -1,0 +1,36 @@
+<title>Borrow Books</title>
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="topnav">
+    <a href="/">Front page</a>
+</div>
+
+<hr>
+  {% for book in books %}
+  {{ book.name }}
+<hr>
+{% endfor %}
+
+<table>
+    <caption> <b>Books</b></caption>
+    <thead style="text-align: left;">
+        <tr>
+            <th></th>
+            <th>Book name</th>
+            <th>Amount</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for book in books %}
+        <tr>
+            <td><input type="checkbox" name="check" value={{ article.ref_key }}></td>
+            <td>{{book.name}}</td>
+            <td>{{book.amount}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

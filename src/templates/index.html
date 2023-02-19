@@ -9,7 +9,7 @@
 {% if session.user_id %}
 
 <div class="topnav">
-    <a href="/loan_books">Borrow books</a>
+    <a href="/borrow_books">Borrow books</a>
     <a href="/return_books">Return books</a>
     <a href="/logout">Logout</a>
 </div>
@@ -22,6 +22,12 @@
 </div>
 
 <p>Welcome to the Library</p>
+
+<hr>
+{% for user in users %}
+{{ user.username }}
+<hr>
+{% endfor %}
 
 {% endif %}
 

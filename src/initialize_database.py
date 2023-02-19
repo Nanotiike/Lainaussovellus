@@ -10,7 +10,22 @@ def create_tables():
         CREATE TABLE users (
             id SERIAL PRIMARY KEY,
             username TEXT UNIQUE,
-            password TEXT
+            password TEXT,
+            admin BOOLEAN
+        );
+
+        CREATE TABLE books (
+            id SERIAL PRIMARY KEY,
+            name TEXT UNIQUE,
+            amount INTEGER
+        );
+
+        CREATE TABLE borrowed (
+            id SERIAL PRIMARY KEY,
+            user_id SERIAL,
+            book_id SERIAL,
+            borrow_date DATE,
+            return_date DATE
         );
     """)
 
@@ -20,6 +35,8 @@ def create_tables():
 def drop_tables():
     db.session.execute("""
         DROP TABLE IF EXISTS users CASCADE;
+        DROP TABLE IF EXISTS books CASCADE;
+        DROP TABRE IF EXISTS borrowed CASCADE;
     """)
 
     db.session.commit()

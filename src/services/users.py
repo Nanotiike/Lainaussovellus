@@ -2,20 +2,21 @@ import os
 from app import db
 from flask import session, abort, request
 from werkzeug.security import check_password_hash, generate_password_hash
+from sqlalchemy import text
 
 def register(username, password):
     hash_value = generate_password_hash(password)
     try:
-        sql = "INSERT INTO users (username, password) VALUES (:username, :password)"
+        sql = text("INSERT INTO users (username, password, admin) VALUES (:username, :password, :admin)")
         db.session.execute(
-            sql, {"username": username, "password": hash_value})
+            sql, {"username": username, "password": hash_value, "admin": False})
         db.session.commit()
         return login(username, password)
     except:
         return False
 
 def login(username, password):
-    sql = "SELECT id, password, username FROM users WHERE username=:username"
+    sql = text("SELECT id, password, username FROM users WHERE username=:username")
     result = db.session.execute(sql, {"username": username})
     user = result.fetchone()
     if not user:
@@ -42,12 +43,13 @@ def check_csrf():
 
 
 def delete_all():
-    sql = "TRUNCATE TABLE users CASCADE"
+    sql = text("TRUNCATE TABLE users CASCADE")
     db.session.execute(sql)
     db.session.commit()
 
 
 def find_all():
-    sql = "SELECT * FROM users"
-    users = db.session.execute(sql).fetchall()
-    return users
+    sql = text("SELECT * FROM users")
+    result = db.session.execute(sql).fetchall()
+    print(result)
+    return result
