@@ -1,0 +1,23 @@
+<title>Add Book</title>
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="topnav">
+    <a href="/">Front page</a>
+    <a href="/borrow_books">Borrow Books</a>
+    <a href="/logout">Logout</a>
+</div>
+
+<b> ~ Fill in all fields ~ </b>
+<form action="/add_book" method="post">
+    <p>
+        Book name: <input type="text" name="name">
+    </p>
+    <p>
+        Amount: <input type="number" name="amount">
+    </p>
+    <input type="submit" value="Add book">
+</form>
+
+{% endblock %}

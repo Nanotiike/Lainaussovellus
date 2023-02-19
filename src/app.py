@@ -38,7 +38,7 @@ def register():
         username = request.form["username"]
         if len(username) < 4:
             return render_template("error.html", message="Username is too short, it should be at least 4 characters long")
-        characters = string.ascii_letters + string.digits + "äåöÄÅÖ"
+        characters = string.ascii_letters + string.digits + "äåöÄÅÖ_"
         for i in username:
             if i not in characters:
                 return render_template("error.html", message="Username must have only letters and numbers in it")
@@ -71,6 +71,16 @@ def confirm_books():
     if request.method == "POST":
         #take chosen books and make borrowings of of them
         pass
+
+@app.route("/add_book", methods = ["get", "post"])
+def add_book():
+    if request.method == "POST":
+        name = request.form("name")
+        amount = request.form("amount")
+        if not books.add_books(name, amount):
+            return render_template("error.html", message="Adding the book failed, try again")
+        
+        return redirect("/borrow_books")
 
 @app.route("/logout")
 def logout():

@@ -5,6 +5,7 @@
 
 <div class="topnav">
     <a href="/">Front page</a>
+    <a href="/logout">Logout</a>
 </div>
 
 <hr>
@@ -32,5 +33,11 @@
         {% endfor %}
     </tbody>
 </table>
+
+{% if session.user_admin %}
+
+<p>User is Admin</p>
+
+{% endif %}
 
 {% endblock %}

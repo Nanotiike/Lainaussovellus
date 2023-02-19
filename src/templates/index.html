@@ -14,6 +14,15 @@
     <a href="/logout">Logout</a>
 </div>
 
+<p>Welcome to the Library</p>
+
+<hr>
+{% for user in users %}
+{{ user.username }}
+{{ user.admin }}
+<hr>
+{% endfor %}
+
 {% else %}
 
 <div class="topnav">
@@ -26,6 +35,7 @@
 <hr>
 {% for user in users %}
 {{ user.username }}
+{{ user.admin }}
 <hr>
 {% endfor %}
 

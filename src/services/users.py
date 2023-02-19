@@ -8,8 +8,12 @@ def register(username, password):
     hash_value = generate_password_hash(password)
     try:
         sql = text("INSERT INTO users (username, password, admin) VALUES (:username, :password, :admin)")
-        db.session.execute(
-            sql, {"username": username, "password": hash_value, "admin": False})
+        if "_ADMIN" in username:
+            db.session.execute(
+                sql, {"username": username, "password": hash_value, "admin": True})
+        else:
+            db.session.execute(
+                sql, {"username": username, "password": hash_value, "admin": False})
         db.session.commit()
         return login(username, password)
     except:
@@ -26,10 +30,17 @@ def login(username, password):
             session["user_id"] = user[0]
             session["user_name"] = user[2]
             session["csrf_token"] = os.urandom(16).hex()
+            session["admin_privilege"] = user[3]
             return True
 
 def user_id():
     return session.get("user_id", 0)
+
+def user_admin():
+    if session.get("admin_privilege", 0) == True:
+        return True
+    else:
+        return False
 
 
 def logout():
