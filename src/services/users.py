@@ -30,14 +30,14 @@ def login(username, password):
             session["user_id"] = user[0]
             session["user_name"] = user[2]
             session["csrf_token"] = os.urandom(16).hex()
-            session["admin_privilege"] = user[3]
+            session["user_admin"] = user[3]
             return True
 
 def user_id():
     return session.get("user_id", 0)
 
 def user_admin():
-    return session.get("admin_privilege", 0)
+    return session.get("user_admin", 0)
 
 
 def logout():

@@ -8,34 +8,36 @@
     <a href="/logout">Logout</a>
 </div>
 
-<table>
-    <caption> <b>Books</b></caption>
-    <thead style="text-align: left;">
-        <tr>
-            <th></th>
-            <th>Book name</th>
-            <th>Amount</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for book in books %}
-        <tr>
-            <td><input type="checkbox" name="check" value={{ book.id }}></td>
-            <td>{{book.name}}</td>
-            <td>{{book.amount}}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<form action="/confirm_books" method="post">
+    <p>Select which books you want to borrow</p>
+    <table>
+        <caption> <b>Books</b></caption>
+        <thead style="text-align: left;">
+            <tr>
+                <th></th>
+                <th>Book name</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+            <tr>
+                <td><input type="checkbox" name="check" value={{ book.id }}></td>
+                <td>{{book.name}}</td>
+                <td>{{book.amount}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <input type="submit" value="Borrow Books">
+</form>
 
 {% if session.user_admin %}
-
-<p>User is Admin</p>
-
-{% endif %}
 
 <form action="/add_book" method="get">
     <input type="submit" value="Add book">
 </form>
+
+{% endif %}
 
 {% endblock %}
